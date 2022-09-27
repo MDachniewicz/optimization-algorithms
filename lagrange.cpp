@@ -75,7 +75,7 @@ void lagrange(double a0, double b0, double c0, double (*func)(double))
         }
 
 
-    printf("i=%i, ai=%f, bi=%f, ci=%f, di=%f , di1=%f\n",i,ai,bi,ci,di, di1);
+    printf("i= %i, ai= %f, bi= %f, ci= %f, di= %f , di-1= %f\n",i,ai,bi,ci,di, di1);
     }while( !( ((bi-ai)<eps) || (abs(di1-di)<=gamma) ) );
 
     printf("Result: %f \n",di);
