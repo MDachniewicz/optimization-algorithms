@@ -1,8 +1,7 @@
-#include<iostream>
-#include<cmath>
-#include<cstdlib>
-#include<time.h>
-#include<conio.h>
+#include <random>
+#include <iostream>
+#include <cmath>
+
 
 
 #define PI 3.14159265358979323846
@@ -11,23 +10,24 @@
 
 using namespace std;
 
+random_device rd;
+mt19937 gen(rd());
+
 double test_fun(double x)
 {
     return (x+(1/pow(x,2)));
 }
 
-double norm_dist_box_muller(double median, double std_dev)
+double norm_dist(double median, double std_dev)
 {
-    double r1,r2;
-    r1 = (double)rand()/(RAND_MAX+1);
-    r2 = (double)rand()/(RAND_MAX+1);
-    return std_dev * sqrt(-2*log(r1))*cos(2*PI*r2) + median;
+    normal_distribution<double> normal_dist(median, std_dev);
+    return normal_dist(gen);
 }
 
 double neighbour(double x, double t, double a, double b)
 {
     double x1;
-    x1=norm_dist_box_muller(x, t);
+    x1=norm_dist(x, t);
     if(x1<a)
     {
         return a;
@@ -44,12 +44,14 @@ double neighbour(double x, double t, double a, double b)
 
 double start_point(double a, double b)
 {
-    return a+(double) rand() / ((double)RAND_MAX/(b-a));
+    uniform_real_distribution<> dist_ab(a,b);
+    return dist_ab(gen);
 }
 
 double random01()
 {
-    return (double)rand()/(RAND_MAX+1);
+    uniform_real_distribution<> dist(0,1);
+    return dist(gen);
 }
 
 double simulated_annealing(double (*func)(double), double tmax, double delta, double a=0, double b=1)
@@ -57,8 +59,8 @@ double simulated_annealing(double (*func)(double), double tmax, double delta, do
     double t,diff,x,x1;
     t=tmax;
     x=start_point(a,b);
-    //printf("t= %f, x= %f \n", t, x);
-    while(t>0.00000001)
+
+    while(t>0.0001)
     {
         x1=neighbour(x,t,a,b);
         diff=func(x1)-func(x);
@@ -83,7 +85,9 @@ double simulated_annealing(double (*func)(double), double tmax, double delta, do
 
 int main()
 {
-    srand( (unsigned)time(NULL));
+
+
+
 
     cout<<start_point(0, 2)<<endl;
     cout<<simulated_annealing(&test_fun, TMAX, DELTA, 0, 2)<<endl;
