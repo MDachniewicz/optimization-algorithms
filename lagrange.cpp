@@ -1,11 +1,11 @@
 #include<iostream>
 #include<cmath>
 
-#define eps 0.1
+#define eps 0.01
 #define gamma 0.0001
 #define NMAX 100
 
-using namespace std;
+
 
 double test_fun(double x)
 {
@@ -75,10 +75,10 @@ void lagrange(double a0, double b0, double c0, double (*func)(double))
         }
 
 
-    printf("i= %i, ai= %f, bi= %f, ci= %f, di= %f , di-1= %f\n",i,ai,bi,ci,di, di1);
-    }while( !( ((bi-ai)<eps) || (abs(di1-di)<=gamma) ) );
+    std::cout<<"i=" <<i<<", ai= " << ai<<", bi= "<<bi<<", ci= "<<ci<<", di= "<<di<<", di-1= "<<di1<<std::endl;
+    }while( !((bi-ai)<eps || fabs(di-di1)<=gamma));
 
-    printf("Result: %f \n",di);
+    std::cout<<"Result: "<< di<<std::endl;
 
 }
 
