@@ -1,11 +1,9 @@
-#include<stdio.h>
-#include <iostream>
+#include<iostream>
 #include<cmath>
 #define H 1
 #define X0 1
 #define NMAX 100
 
-using namespace std;
 
 float test_fun(float x)
 {
@@ -28,7 +26,7 @@ void BDS(float h, float x0, int Nmax, float (*func)(float))
 
         if(i>Nmax)
         {
-            printf("Error");
+            std::cout<<"Error"<<std::endl;
         }
     }
 
@@ -50,11 +48,11 @@ void BDS(float h, float x0, int Nmax, float (*func)(float))
 
         if(i>Nmax)
         {
-            printf("Error");
+            std::cout<<"Error"<<std::endl;
         }
     }
-    printf("f(%f)=%f \n",xi, func(xi));
-    printf("a=%f \n",xi1);
+    std::cout<<"f("<<xi<<")="<<func(xi)<<std::endl;
+    std::cout<<"a="<<xi1<<std::endl;
 }
 
 int main()
