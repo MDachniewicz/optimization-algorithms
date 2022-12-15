@@ -17,12 +17,12 @@ void BDS(float h, float x0, int Nmax, float (*func)(float))
 
 
     xi=x0;
-    xi1=x0+pow(2, i)*h;
+    xi1=x0+std::pow(2, i)*h;
     while(func(xi1)<func(xi))
     {
         i++;
         xi=xi1;
-        xi1=x0+pow(2, i)*h;
+        xi1=x0+std::pow(2, i)*h;
 
         if(i>Nmax)
         {
@@ -33,18 +33,17 @@ void BDS(float h, float x0, int Nmax, float (*func)(float))
 
 
 
-    printf("b=%f \n",xi1);
-    //return 0;
+    std::cout<<"b="<<xi1<<std::endl;
 
 
     i=0;
     xi=x0;
-    xi1=x0-pow(2, i)*h;
+    xi1=x0-std::pow(2, i)*h;
     while(func(xi1)<func(xi))
     {
         i++;
         xi=xi1;
-        xi1=x0-pow(2, i)*h;
+        xi1=x0-std::pow(2, i)*h;
 
         if(i>Nmax)
         {

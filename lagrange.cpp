@@ -23,7 +23,8 @@ void lagrange(double a0, double b0, double c0, double (*func)(double))
     {
 
         di1=di;
-        di=0.5*(func(ai)*(pow(ci,2)-pow(bi,2))+func(ci)*(pow(bi,2)-pow(ai,2))+func(bi)*(pow(ai,2)-pow(ci,2)))/(func(ai)*(ci-bi)+func(ci)*(bi-ai)+func(bi)*(ai-ci));
+        di=0.5*(func(ai)*(std::pow(ci,2)-std::pow(bi,2))+func(ci)*(std::pow(bi,2)-std::pow(ai,2))+func(bi)*(std::pow(ai,2)-std::pow(ci,2)))
+            /(func(ai)*(ci-bi)+func(ci)*(bi-ai)+func(bi)*(ai-ci));
 
 
         if((ai<di) && (di<ci))
@@ -60,7 +61,7 @@ void lagrange(double a0, double b0, double c0, double (*func)(double))
             }
             else
             {
-                printf("The algorithm does not converge. \n");
+                std::cout<<"The algorithm does not converge."<<std::endl;
                 break;
             }
         }
@@ -70,13 +71,13 @@ void lagrange(double a0, double b0, double c0, double (*func)(double))
         ci=ci1;
         if(i>NMAX)
         {
-            printf("Accuracy not achieved. \n");
+            std::cout<<"Accuracy not achieved."<<std::endl;
             break;
         }
 
 
     std::cout<<"i=" <<i<<", ai= " << ai<<", bi= "<<bi<<", ci= "<<ci<<", di= "<<di<<", di-1= "<<di1<<std::endl;
-    }while( !((bi-ai)<eps || fabs(di-di1)<=gamma));
+    }while( !((bi-ai)<eps || std::abs(di-di1)<=gamma));
 
     std::cout<<"Result: "<< di<<std::endl;
 
