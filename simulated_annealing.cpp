@@ -8,10 +8,10 @@
 #define TMAX 1.0
 #define DELTA 0.0001
 
-using namespace std;
+//using namespace std;
 
-random_device rd;
-mt19937 gen(rd());
+std::random_device rd;
+std::mt19937 gen(rd());
 
 double test_fun(double x)
 {
@@ -20,7 +20,7 @@ double test_fun(double x)
 
 double norm_dist(double median, double std_dev)
 {
-    normal_distribution<double> normal_dist(median, std_dev);
+    std::normal_distribution<double> normal_dist(median, std_dev);
     return normal_dist(gen);
 }
 
@@ -44,13 +44,13 @@ double neighbour(double x, double t, double a, double b)
 
 double start_point(double a, double b)
 {
-    uniform_real_distribution<> dist_ab(a,b);
+    std::uniform_real_distribution<> dist_ab(a,b);
     return dist_ab(gen);
 }
 
 double random01()
 {
-    uniform_real_distribution<> dist(0,1);
+    std::uniform_real_distribution<> dist(0,1);
     return dist(gen);
 }
 
@@ -76,7 +76,7 @@ double simulated_annealing(double (*func)(double), double tmax, double delta, do
             }
 
         }
-        //printf("t= %f, x= %f \n", t, x);
+        
         t=t-delta*t;
 
     }
@@ -89,8 +89,8 @@ int main()
 
 
 
-    cout<<start_point(0, 2)<<endl;
-    cout<<simulated_annealing(&test_fun, TMAX, DELTA, 0, 2)<<endl;
+    std::cout<<"Starting point: "<<start_point(0, 2) << std::endl;
+    std::cout<<"Minimum: "<<simulated_annealing(&test_fun, TMAX, DELTA, 0, 2) << std::endl;
 
     return 0;
 }
